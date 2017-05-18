@@ -10,24 +10,24 @@ import XCTest
 @testable import Colloop
 
 class CoRoutineTests: XCTestCase {
-    
+
     func testColloopWithOneBigStep() {
         // given
         var results = [String]()
         // when
-        (["a", "b", "c"].colloop(withStep: 10){ o in
+        (["a", "b", "c"].colloop(withStep: 10) { o in
             results.append("\(o)_")
         }).run()
         // then
         XCTAssertEqual(["a_", "b_", "c_"], results)
     }
-    
+
     func testColloopWithMultipleSteps() {
         // given
         var results = [String]()
         let done = expectation(description: "Wait for colloop")
-        
-        let r = ["a", "b", "c"].colloop(withStep: 1){ o in
+
+        let r = ["a", "b", "c"].colloop(withStep: 1) { o in
             results.append("\(o)_")
         }
         r.onDone = {
@@ -36,16 +36,16 @@ class CoRoutineTests: XCTestCase {
         // when
         r.run()
         // then
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: 1) { _ in
             XCTAssertEqual(["a_", "b_", "c_"], results)
         }
     }
-    
+
     func testColloopWithMultipleStepsAndCancel() {
         // given
         var results = [String]()
         let done = expectation(description: "Wait for colloop")
-        let r = ["a", "b", "c"].colloop(withStep: 2){ o in
+        let r = ["a", "b", "c"].colloop(withStep: 2) { o in
             results.append("\(o)_")
         }
         OperationQueue.main.addOperation {
@@ -57,20 +57,20 @@ class CoRoutineTests: XCTestCase {
         // when
         r.run()
         // then
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: 1) { _ in
             XCTAssertEqual(["a_", "b_"], results)
         }
     }
-    
+
     func testCoroutineWithMultipleCoRoutinesAndSteps() {
         // given
         var results = [String]()
         let done = expectation(description: "Wait for colloop")
-        
-        let r1 = ["a", "b", "c"].colloop(withStep: 2){ o in
+
+        let r1 = ["a", "b", "c"].colloop(withStep: 2) { o in
             results.append("\(o)_")
         }
-        let r2 = ["1", "2", "3"].colloop(withStep: 1){ o in
+        let r2 = ["1", "2", "3"].colloop(withStep: 1) { o in
             results.append("\(o)_")
         }
         r2.onDone = {
@@ -80,21 +80,21 @@ class CoRoutineTests: XCTestCase {
         r1.run()
         r2.run()
         // then
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: 1) { _ in
             XCTAssertEqual(["a_", "b_", "1_", "c_", "2_", "3_"], results)
         }
     }
-    
+
     func testCoroutineWithMultipleStepsOnDedicatedQueue() {
         // given
         var results = [String]()
         let done = expectation(description: "Wait for colloop")
-        
-        let r = ["a", "b", "c"].colloop(withStep: 1){ o in
+
+        let r = ["a", "b", "c"].colloop(withStep: 1) { o in
             results.append("\(o)_")
         }
         let q = DispatchQueue(label: "test")
-        
+
         r.dispatchQueue = q
         r.onDone = {
             done.fulfill()
@@ -102,23 +102,23 @@ class CoRoutineTests: XCTestCase {
         // when
         r.run()
         // then
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: 1) { _ in
             XCTAssertEqual(["a_", "b_", "c_"], results)
         }
     }
-    
+
     func testCoroutineWithMultipleCoRoutinesAndStepsOnDeidcatedQueue() {
         // given
         var results = [String]()
         let done = expectation(description: "Wait for colloop")
-        
+
         let q = DispatchQueue(label: "test")
-        
-        let r1 = ["a", "b", "c"].colloop(withStep: 2){ o in
+
+        let r1 = ["a", "b", "c"].colloop(withStep: 2) { o in
             results.append("\(o)_")
         }
         r1.dispatchQueue = q
-        let r2 = ["1", "2", "3"].colloop(withStep: 1){ o in
+        let r2 = ["1", "2", "3"].colloop(withStep: 1) { o in
             results.append("\(o)_")
         }
         r2.onDone = {
@@ -129,28 +129,28 @@ class CoRoutineTests: XCTestCase {
         r1.run()
         r2.run()
         // then
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: 1) { _ in
             XCTAssertEqual(["a_", "b_", "1_", "c_", "2_", "3_"], results)
         }
     }
-    
+
     func testCoroutineWithOneBigDeltaTime() {
         // given
         var results = [String]()
         // when
-        (["a", "b", "c"].colloop(withDeltaTime: 1.0){ o in
+        (["a", "b", "c"].colloop(withDeltaTime: 1.0) { o in
             results.append("\(o)_")
         }).run()
         // then
         XCTAssertEqual(["a_", "b_", "c_"], results)
     }
-    
+
     func testCoroutineWithShortDeltaTime() {
         // given
         var results = [String]()
         let done = expectation(description: "Wait for colloop")
-        
-        let r = ["a", "b", "c"].colloop(withDeltaTime: 0.0000001){ o in
+
+        let r = ["a", "b", "c"].colloop(withDeltaTime: 0.0000001) { o in
             results.append("\(o)_")
         }
         r.onDone = {
@@ -159,17 +159,17 @@ class CoRoutineTests: XCTestCase {
         // when
         r.run()
         // then
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: 1) { _ in
             XCTAssertEqual(["a_", "b_", "c_"], results)
         }
     }
-    
+
     func testCoroutineWithShortDeltaTimeAndCancel() {
         // given
         var results = [String]()
         let done = expectation(description: "Wait for colloop")
-        
-        let r = ["a", "b", "c"].colloop(withDeltaTime: 0.0000001){ o in
+
+        let r = ["a", "b", "c"].colloop(withDeltaTime: 0.0000001) { o in
             results.append("\(o)_")
         }
         DispatchQueue.main.async {
@@ -181,20 +181,20 @@ class CoRoutineTests: XCTestCase {
         // when
         r.run()
         // then
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: 1) { _ in
             XCTAssertEqual(["a_"], results)
         }
     }
-    
+
     func testMultipleCoroutinesWithShortDeltaTimeAndStep() {
         // given
         var results = [String]()
         let done = expectation(description: "Wait for colloop")
-        
-        let r1 = ["a", "b", "c"].colloop(withDeltaTime: 0.0000001){ o in
+
+        let r1 = ["a", "b", "c"].colloop(withDeltaTime: 0.0000001) { o in
             results.append("\(o)_")
         }
-        let r2 = ["1", "2", "3"].colloop(withStep: 2){ o in
+        let r2 = ["1", "2", "3"].colloop(withStep: 2) { o in
             results.append("\(o)_")
         }
         r1.onDone = {
@@ -204,7 +204,7 @@ class CoRoutineTests: XCTestCase {
         r1.run()
         r2.run()
         // then
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: 1) { _ in
             XCTAssertEqual(["a_", "1_", "2_", "b_", "3_", "c_"], results)
         }
     }
