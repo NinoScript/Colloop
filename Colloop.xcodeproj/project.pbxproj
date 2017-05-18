@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0BB9DBF51ECDA88A005D4121 /* Colloop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB9DBEB1ECDA88A005D4121 /* Colloop.framework */; };
-		0BB9DBFA1ECDA88A005D4121 /* ColloopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB9DBF91ECDA88A005D4121 /* ColloopTests.swift */; };
 		0BB9DBFC1ECDA88A005D4121 /* Colloop.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BB9DBEE1ECDA88A005D4121 /* Colloop.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0BB9DC081ECDA8C4005D4121 /* Colloop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB9DC071ECDA8C4005D4121 /* Colloop.swift */; };
+		0BB9DC0B1ECDA8E0005D4121 /* ColloopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB9DC0A1ECDA8E0005D4121 /* ColloopTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,8 +28,10 @@
 		0BB9DBEE1ECDA88A005D4121 /* Colloop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Colloop.h; sourceTree = "<group>"; };
 		0BB9DBEF1ECDA88A005D4121 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BB9DBF41ECDA88A005D4121 /* ColloopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColloopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0BB9DBF91ECDA88A005D4121 /* ColloopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColloopTests.swift; sourceTree = "<group>"; };
 		0BB9DBFB1ECDA88A005D4121 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0BB9DC071ECDA8C4005D4121 /* Colloop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colloop.swift; sourceTree = "<group>"; };
+		0BB9DC091ECDA8DF005D4121 /* ColloopTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ColloopTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		0BB9DC0A1ECDA8E0005D4121 /* ColloopTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColloopTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +74,7 @@
 		0BB9DBED1ECDA88A005D4121 /* Colloop */ = {
 			isa = PBXGroup;
 			children = (
+				0BB9DC071ECDA8C4005D4121 /* Colloop.swift */,
 				0BB9DBEE1ECDA88A005D4121 /* Colloop.h */,
 				0BB9DBEF1ECDA88A005D4121 /* Info.plist */,
 			);
@@ -80,8 +84,9 @@
 		0BB9DBF81ECDA88A005D4121 /* ColloopTests */ = {
 			isa = PBXGroup;
 			children = (
-				0BB9DBF91ECDA88A005D4121 /* ColloopTests.swift */,
+				0BB9DC0A1ECDA8E0005D4121 /* ColloopTests.swift */,
 				0BB9DBFB1ECDA88A005D4121 /* Info.plist */,
+				0BB9DC091ECDA8DF005D4121 /* ColloopTests-Bridging-Header.h */,
 			);
 			path = ColloopTests;
 			sourceTree = "<group>";
@@ -149,11 +154,13 @@
 					0BB9DBEA1ECDA88A005D4121 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = TK59L26FS4;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					0BB9DBF31ECDA88A005D4121 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = TK59L26FS4;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -198,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BB9DC081ECDA8C4005D4121 /* Colloop.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,7 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BB9DBFA1ECDA88A005D4121 /* ColloopTests.swift in Sources */,
+				0BB9DC0B1ECDA8E0005D4121 /* ColloopTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +329,7 @@
 		0BB9DC001ECDA88A005D4121 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -335,6 +344,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = maxim.zaks.Colloop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -342,6 +352,7 @@
 		0BB9DC011ECDA88A005D4121 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -363,12 +374,16 @@
 		0BB9DC031ECDA88A005D4121 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = TK59L26FS4;
 				INFOPLIST_FILE = ColloopTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = maxim.zaks.ColloopTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ColloopTests/ColloopTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -376,12 +391,15 @@
 		0BB9DC041ECDA88A005D4121 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = TK59L26FS4;
 				INFOPLIST_FILE = ColloopTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = maxim.zaks.ColloopTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ColloopTests/ColloopTests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
