@@ -126,8 +126,10 @@ class CoRoutineTests: XCTestCase {
         }
         r2.dispatchQueue = q
         // when
-        r1.run()
-        r2.run()
+        q.async { // because when we start it on the main queue the result is non deterministic
+            r1.run()
+            r2.run()
+        }
         // then
         waitForExpectations(timeout: 1) { error in
             XCTAssertEqual(["a_", "b_", "1_", "c_", "2_", "3_"], results)
